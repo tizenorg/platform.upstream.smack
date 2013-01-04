@@ -1,0 +1,4 @@
+* Mon Jan 07 2013 Patrick McCarty <patrick.mccarty@linux.intel.com> 36d3fa3
+- Run AM_PROG_AR for newer automake
+- Add Tizen packaging spec file
+
