@@ -1,0 +1,20 @@
+* Thu Aug 9 2013 Jarkko Sakkinen <jarkko.sakkinen@intel.com>
+- Added .gbs.conf for upstream tracking and bumped version 1.0.1.
+
+* Thu Aug 8 2013 Jarkko Sakkinen <jarkko.sakkinen@intel.com>
+- Removed "/smack" from smack.spec. It's not used anymore and causes RPMLINT error.
+
+* Fri May 17 2013 Anas Nashif <anas.nashif@intel.com> c9b1e5d
+- Update code from upstream
+
+* Thu Mar 21 2013 Patrick McCarty <patrick.mccarty@linux.intel.com> ddddc70
+- Disable smack.mount and smack.service
+
+* Mon Mar 18 2013 Anas Nashif <anas.nashif@intel.com> accepted/trunk/20130108.195935@d5c7f4d
+- Fixed package group and split library
+
+* Tue Jan 08 2013 Patrick McCarty <patrick.mccarty@linux.intel.com> 669bb1b
+- libsmack: add functions for getting and setting labels from files.
+
+* Mon Jan 07 2013 Patrick McCarty <patrick.mccarty@linux.intel.com> 36d3fa3
+- Add Tizen packaging spec file
