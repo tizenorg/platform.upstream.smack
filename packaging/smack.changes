@@ -1,3 +1,6 @@
+* Mon Mar 18 2013 Anas Nashif <anas.nashif@intel.com> accepted/trunk/20130108.195935@d5c7f4d
+- Fixed package group and split library
+
 * Tue Jan 08 2013 Patrick McCarty <patrick.mccarty@linux.intel.com> 669bb1b
 - libsmack: add functions for getting and setting labels from files.
 
