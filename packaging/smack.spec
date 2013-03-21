@@ -44,11 +44,6 @@ install -d %{buildroot}/etc/smack/accesses.d
 install -d %{buildroot}/etc/smack/cipso.d
 install -d %{buildroot}/smack
 
-install -d %{buildroot}%{_prefix}/lib/systemd/system/basic.target.wants
-install -d %{buildroot}%{_prefix}/lib/systemd/system/local-fs.target.wants
-ln -s ../smack.service %{buildroot}%{_prefix}/lib/systemd/system/basic.target.wants/smack.service
-ln -s ../smack.mount %{buildroot}%{_prefix}/lib/systemd/system/local-fs.target.wants/smack.mount
-
 
 %post -p /sbin/ldconfig -n libsmack
 
@@ -76,6 +71,4 @@ ln -s ../smack.mount %{buildroot}%{_prefix}/lib/systemd/system/local-fs.target.w
 /smack
 %attr(755,root,root) %{_bindir}/*
 %{_prefix}/lib/systemd/system/smack.mount
-%{_prefix}/lib/systemd/system/local-fs.target.wants/smack.mount
 %{_prefix}/lib/systemd/system/smack.service
-%{_prefix}/lib/systemd/system/basic.target.wants/smack.service
