@@ -92,6 +92,7 @@ struct smack_cipso {
 };
 
 static int accesses_apply(struct smack_accesses *handle, int clear);
+static inline void parse_access_type(const char *in, char out[ACC_LEN + 1]); 
 static inline int access_type_to_int(const char *access_type);
 static inline void int_to_access_type_c(unsigned ac, char *str);
 static inline void int_to_access_type_k(unsigned ac, char *str);
