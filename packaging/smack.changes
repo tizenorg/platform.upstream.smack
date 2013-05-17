@@ -1,3 +1,6 @@
+* Fri May 17 2013 Anas Nashif <anas.nashif@intel.com> c9b1e5d
+- Update code from upstream
+
 * Thu Mar 21 2013 Patrick McCarty <patrick.mccarty@linux.intel.com> ddddc70
 - Disable smack.mount and smack.service
 
