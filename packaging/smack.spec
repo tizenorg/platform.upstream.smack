@@ -6,6 +6,7 @@ Group:      Security/Access Control
 License:    LGPL-2.1
 URL:        https://github.com/smack-team/smack
 Source0:    %{name}-%{version}.tar.gz
+Source1001: %{name}.manifest
 BuildRequires: automake
 BuildRequires: autoconf
 BuildRequires: libtool
@@ -30,6 +31,7 @@ Library allows applications to work with Smack.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 autoreconf --install --symlink
@@ -53,17 +55,20 @@ install -d %{buildroot}/smack
 %docs_package
 
 %files -n libsmack
+%manifest %{name}.manifest
 %defattr(644,root,root,755)
 %license COPYING
 %{_libdir}/libsmack.so.*
 
 %files devel
+%manifest %{name}.manifest
 %defattr(644,root,root,755)
 %{_includedir}/sys/smack.h
 %{_libdir}/libsmack.so
 %{_libdir}/pkgconfig/libsmack.pc
 
 %files 
+%manifest %{name}.manifest
 %defattr(644,root,root,755)
 %{_sysconfdir}/smack
 %{_sysconfdir}/smack/accesses.d
