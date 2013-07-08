@@ -1,0 +1,8 @@
+Change-Id: I740ed857272413a273e59a1c33082a92152bccf7
+Code-Review+2: Ryan Ware <ware@linux.intel.com>
+Verified+1: Ryan Ware <ware@linux.intel.com>
+Submitted-by: Ryan Ware <ware@linux.intel.com>
+Submitted-at: Mon, 08 Jul 2013 09:39:16 -0700
+Reviewed-on: https://review.tizen.org/gerrit/4918
+Project: platform/upstream/smack
+Branch: refs/heads/tizen
