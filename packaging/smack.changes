@@ -1,3 +1,6 @@
+* Thu Aug 18 2013 Jarkko Sakkinen <jarkko.sakkinen@intel.com>
+- Removed "/smack" from smack.spec. It's not used anymore and causes RPMLINT error.
+
 * Fri May 17 2013 Anas Nashif <anas.nashif@intel.com> c9b1e5d
 - Update code from upstream
 
