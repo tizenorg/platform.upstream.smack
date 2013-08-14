@@ -1,5 +1,5 @@
 Name:       smack
-Version:    1.0
+Version:    1.0.1
 Release:    1
 Summary:    Selection of tools for developers working with Smack
 Group:      Security/Access Control
