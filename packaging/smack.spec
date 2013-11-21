@@ -10,6 +10,7 @@ Source1001: 	smack.manifest
 BuildRequires: automake
 BuildRequires: autoconf
 BuildRequires: libtool
+BuildRequires: pkg-config
 
 %description
 Tools provided to load and unload rules from the kernel and query the policy
