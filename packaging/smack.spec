@@ -74,5 +74,3 @@ install -d %{buildroot}/smack
 %{_sysconfdir}/smack/accesses.d
 %{_sysconfdir}/smack/cipso.d
 %attr(755,root,root) %{_bindir}/*
-%{_prefix}/lib/systemd/system/smack.mount
-%{_prefix}/lib/systemd/system/smack.service
