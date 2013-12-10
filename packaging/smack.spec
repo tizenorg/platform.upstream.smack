@@ -44,6 +44,7 @@ make %{?_smp_mflags}
 
 install -d %{buildroot}/etc/smack/accesses.d
 install -d %{buildroot}/etc/smack/cipso.d
+install -d %{buildroot}/etc/smack/netlabel.d
 install -d %{buildroot}/smack
 
 
@@ -73,4 +74,5 @@ install -d %{buildroot}/smack
 %{_sysconfdir}/smack
 %{_sysconfdir}/smack/accesses.d
 %{_sysconfdir}/smack/cipso.d
+%{_sysconfdir}/smack/netlabel.d
 %attr(755,root,root) %{_bindir}/*
