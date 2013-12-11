@@ -1,2 +1,3 @@
 etc/smack/accesses.d
 etc/smack/cipso.d
+etc/smack/netlabel.d
