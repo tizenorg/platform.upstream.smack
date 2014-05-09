@@ -35,24 +35,19 @@ Library allows applications to work with Smack.
 cp %{SOURCE1001} .
 
 %build
-autoreconf --install --symlink
-%configure --with-systemdsystemunitdir=%{_prefix}/lib/systemd/system
+%reconfigure --with-systemdsystemunitdir=%{_unitdir}
 
 make %{?_smp_mflags}
 
 %install
 %make_install
-
-install -d %{buildroot}/etc/smack/accesses.d
-install -d %{buildroot}/etc/smack/cipso.d
-install -d %{buildroot}/etc/smack/netlabel.d
-install -d %{buildroot}/smack
-
+install -d %{buildroot}%{_sysconfdir}/smack/accesses.d
+install -d %{buildroot}%{_sysconfdir}/smack/cipso.d
+install -d %{buildroot}%{_sysconfdir}/smack/netlabel.d
 
 %post -p /sbin/ldconfig -n libsmack
 
 %postun -p /sbin/ldconfig -n libsmack
-
 
 %docs_package
 
@@ -69,7 +64,7 @@ install -d %{buildroot}/smack
 %{_libdir}/libsmack.so
 %{_libdir}/pkgconfig/libsmack.pc
 
-%files 
+%files
 %manifest %{name}.manifest
 %defattr(644,root,root,755)
 %{_sysconfdir}/smack
@@ -77,3 +72,4 @@ install -d %{buildroot}/smack
 %{_sysconfdir}/smack/cipso.d
 %{_sysconfdir}/smack/netlabel.d
 %attr(755,root,root) %{_bindir}/*
+
