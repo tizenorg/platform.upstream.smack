@@ -11,6 +11,7 @@ BuildRequires: automake
 BuildRequires: autoconf
 BuildRequires: libtool
 BuildRequires: pkg-config
+Requires:      default-ac-domains
 
 %description
 Tools provided to load and unload rules from the kernel and query the policy
