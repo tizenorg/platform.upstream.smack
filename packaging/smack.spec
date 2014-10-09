@@ -61,13 +61,13 @@ install -d %{buildroot}%{_sysconfdir}/smack/netlabel.d
 %manifest %{name}.manifest
 %defattr(644,root,root,755)
 %{_includedir}/sys/smack.h
+%{_includedir}/sys/smack-tizen-legacy.h
 %{_libdir}/libsmack.so
 %{_libdir}/pkgconfig/libsmack.pc
 
 %files
 %manifest %{name}.manifest
 %defattr(644,root,root,755)
-%{_sysconfdir}/smack
 %{_sysconfdir}/smack/accesses.d
 %{_sysconfdir}/smack/cipso.d
 %{_sysconfdir}/smack/netlabel.d

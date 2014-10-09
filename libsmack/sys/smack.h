@@ -327,6 +327,10 @@ ssize_t smack_label_length(const char *label);
  */
 int smack_load_policy(void);
 
+#if !defined(NO_TIZEN_LEGACY)
+#include <sys/smack-tizen-legacy.h>
+#endif
+
 #ifdef __cplusplus
 }
 #endif
