@@ -21,6 +21,7 @@
  */
 
 #include "sys/smack.h"
+#include "common.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -662,6 +663,77 @@ ssize_t smack_new_label_from_path(const char *path, const char *xattr,
 	return ret;
 }
 
+ssize_t smack_new_label_from_file(int fd, const char *xattr, 
+				  char **label)
+{
+	char buf[SMACK_LABEL_LEN + 1];
+	char *result;
+	ssize_t ret = 0;
+
+	ret = fgetxattr(fd, xattr, buf, SMACK_LABEL_LEN + 1);
+	if (ret < 0)
+		return -1;
+	buf[ret] = '\0';
+
+	result = calloc(ret + 1, 1);
+	if (result == NULL)
+		return -1;
+
+	ret = get_label(result, buf, NULL);
+	if (ret < 0) {
+		free(result);
+		return -1;
+	}
+
+	*label = result;
+	return ret;
+}
+
+int smack_set_label_for_path(const char *path,
+				  const char *xattr,
+				  int follow,
+				  const char *label)
+{
+	int len;
+	int ret;
+
+	len = (int)smack_label_length(label);
+	if (len < 0)
+		return -2;
+
+	ret = follow ?
+		setxattr(path, xattr, label, len, 0) :
+		lsetxattr(path, xattr, label, len, 0);
+	return ret;
+}
+
+int smack_set_label_for_file(int fd,
+				  const char *xattr,
+				  const char *label)
+{
+	int len;
+	int ret;
+
+	len = (int)smack_label_length(label);
+	if (len < 0)
+		return -2;
+
+	ret = fsetxattr(fd, xattr, label, len, 0);
+	return ret;
+}
+
+int smack_remove_label_for_path(const char *path,
+				  const char *xattr,
+				  int follow)
+{
+	return follow ? removexattr(path, xattr) : lremovexattr(path, xattr);
+}
+
+int smack_remove_label_for_file(int fd, const char *xattr)
+{
+	return fremovexattr(fd, xattr);
+}
+
 int smack_set_label_for_self(const char *label)
 {
 	int len;
@@ -796,6 +868,11 @@ int smack_fsetlabel(int fd, const char* label,
 {
 	return internal_setlabel((void*) ((unsigned long) fd), label, type,
 			(setxattr_func) fsetxattr, (removexattr_func) fremovexattr);
+}
+
+ssize_t smack_label_length(const char *label)
+{
+	return get_label(NULL, label, NULL);
 }
 
 static int open_smackfs_file(const char *long_name, const char *short_name,
@@ -1219,4 +1296,23 @@ static struct smack_label *label_add(struct smack_accesses *handle, const char *
 	}
 
 	return new_label;
+}
+
+int smack_load_policy(void)
+{
+	if (!smack_smackfs_path()) {
+		fprintf(stderr, "SmackFS is not mounted.\n");
+		return -1;
+	}
+
+	if (clear())
+		return -1;
+
+	if (apply_rules(ACCESSES_D_PATH, 0))
+		return -1;
+
+	if (apply_cipso(CIPSO_D_PATH))
+		return -1;
+
+	return 0;
 }

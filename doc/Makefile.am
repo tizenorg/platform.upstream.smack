@@ -25,6 +25,7 @@ doxygen.stamp: Doxyfile
 clean-local:
 	rm -rf html
 	rm -rf man
+	rm -f doxygen_sqlite3.db
 
 EXTRA_MANS = \
 	man/man3/SMACK_LABEL_LEN.3 \
@@ -42,6 +43,7 @@ EXTRA_MANS = \
 	man/man3/smack_cipso_free.3 \
 	man/man3/smack_cipso_new.3 \
 	man/man3/smack_have_access.3 \
+	man/man3/smack_label_length.3 \
 	man/man3/smack_new_label_from_path.3 \
 	man/man3/smack_new_label_from_self.3 \
 	man/man3/smack_new_label_from_socket.3 \

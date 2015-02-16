@@ -239,6 +239,69 @@ ssize_t smack_new_label_from_path(const char *path,
 				  char **label);
 
 /*!
+  * Get the SMACK label that is contained in an extended attribute.
+  * Caller is responsible of freeing the returned label.
+  *
+  * @param fd opened file descriptor of the file
+  * @param xattr the extended attribute containing the SMACK label
+  * @param label output variable for the returned label
+  * @return Returns length of the label on success and negative value
+  * on failure.
+  */
+ssize_t smack_new_label_from_file(int fd,
+				  const char *xattr,
+				  char **label);
+
+/*!
+  * Set the SMACK label in an extended attribute.
+  *
+  * @param path path of the file
+  * @param xattr the extended attribute containing the SMACK label
+  * @param follow whether or not to follow symbolic link
+  * @param label output variable for the returned label
+  * @return Returns length of the label on success and negative value
+  * on failure.
+  */
+int smack_set_label_for_path(const char *path,
+				  const char *xattr,
+				  int follow,
+				  const char *label);
+
+/*!
+  * Set the SMACK label in an extended attribute.
+  *
+  * @param fd opened file descriptor of the file
+  * @param xattr the extended attribute containing the SMACK label
+  * @param label output variable for the returned label
+  * @return Returns length of the label on success and negative value
+  * on failure.
+  */
+int smack_set_label_for_file(int fd,
+				  const char *xattr,
+				  const char *label);
+
+/*!
+  * Remove the SMACK label in an extended attribute.
+  *
+  * @param path path of the file
+  * @param xattr the extended attribute containing the SMACK label
+  * @param follow whether or not to follow symbolic link
+  * @return Returns 0 on success and negative on failure.
+  */
+int smack_remove_label_for_path(const char *path,
+				  const char *xattr,
+				  int follow);
+
+/*!
+  * Remove the SMACK label in an extended attribute.
+  *
+  * @param fd opened file descriptor of the file
+  * @param xattr the extended attribute containing the SMACK label
+  * @return Returns 0 on success and negative on failure.
+  */
+int smack_remove_label_for_file(int fd, const char *xattr);
+
+/*!
  * Set the label associated with the callers process. The caller must have
  * CAP_MAC_ADMIN POSIX capability in order to do this.
  *
@@ -335,6 +398,24 @@ int smack_lsetlabel(const char *path, const char* label,
  */
 int smack_fsetlabel(int fd, const char* label,
 		enum smack_label_type type);
+
+/*!
+ * Validate a SMACK label and calculate its length.
+ *
+ * @param label label to verify
+ * @return Returns length of the label on success and negative on failure.
+ */
+ssize_t smack_label_length(const char *label);
+
+/*!
+ * Perform the initial policy load.
+ * This function loads the Smack policy from default location and loads
+ * it to kernel. Smackfs file system must be alreadt mounted.
+ * It is designed for init process to load the policy at system startup.
+ *
+ * @return Returns 0 on success and negative on failure.
+ */
+int smack_load_policy(void);
 
 #ifdef __cplusplus
 }
