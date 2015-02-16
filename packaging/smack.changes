@@ -1,3 +1,6 @@
+* Mon Feb 16 2015 Rafal Krypa <r.krypa@samsung.com>
+- Merge upstream version 1.1.0
+
 * Thu Aug 9 2013 Jarkko Sakkinen <jarkko.sakkinen@intel.com>
 - Added .gbs.conf for upstream tracking and bumped version 1.0.1.
 
