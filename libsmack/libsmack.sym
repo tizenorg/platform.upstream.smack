@@ -38,6 +38,7 @@ global:
 	smack_new_label_from_file;
 	smack_set_label_for_file;
 	smack_remove_label_for_file;
+	smack_set_relabel_self;
 local:
 	*;
 } LIBSMACK_1.0;
