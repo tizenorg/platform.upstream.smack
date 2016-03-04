@@ -3,7 +3,7 @@ Version:    1.1.0
 Release:    1
 Summary:    Selection of tools for developers working with Smack
 Group:      Security/Access Control
-License:    LGPL-2.1 and GPL-2.0
+License:    LGPL-2.1+ and GPL-2.0+
 URL:        https://github.com/smack-team/smack
 Source0:    %{name}-%{version}.tar.gz
 Source1001: 	smack.manifest
