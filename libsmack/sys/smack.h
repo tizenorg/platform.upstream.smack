@@ -65,14 +65,14 @@ extern "C" {
  * @return Returns 0 on success and negative on failure. If the operation
  * is succesful 'accesses' variable will contain a valid pointer.
  */
-int smack_accesses_new(struct smack_accesses **handle);
+__attribute__ ((visibility ("default"))) int smack_accesses_new(struct smack_accesses **handle);
 
 /*!
  * Destroys a struct smack_accesses instance.
  *
  * @param handle handle to a struct smack_accesses instance
  */
-void smack_accesses_free(struct smack_accesses *handle);
+__attribute__ ((visibility ("default"))) void smack_accesses_free(struct smack_accesses *handle);
 
 /*!
  * Write access rules to a given file.
@@ -81,7 +81,7 @@ void smack_accesses_free(struct smack_accesses *handle);
  * @param fd file descriptor to the open file
  * @return Returns 0 on success and negative on failure.
  */
-int smack_accesses_save(struct smack_accesses *handle, int fd);
+__attribute__ ((visibility ("default"))) int smack_accesses_save(struct smack_accesses *handle, int fd);
 
 /*!
  * Apply access rules to the kernel. Rules are applied in the order that
@@ -90,7 +90,7 @@ int smack_accesses_save(struct smack_accesses *handle, int fd);
  * @param handle handle to a struct smack_accesses instance
  * @return Returns 0 on success and negative on failure.
  */
-int smack_accesses_apply(struct smack_accesses *handle);
+__attribute__ ((visibility ("default"))) int smack_accesses_apply(struct smack_accesses *handle);
 
 /*!
  * Clear access rules from the kernel. Clears the rules by writing
@@ -100,7 +100,7 @@ int smack_accesses_apply(struct smack_accesses *handle);
  * @param handle handle to a struct smack_accesses instance
  * @return Returns 0 on success and negative on failure.
  */
-int smack_accesses_clear(struct smack_accesses *handle);
+__attribute__ ((visibility ("default"))) int smack_accesses_clear(struct smack_accesses *handle);
 
 /*!
  * Add a new rule to the given access rules.
@@ -111,7 +111,7 @@ int smack_accesses_clear(struct smack_accesses *handle);
  * @param access_type access type
  * @return Returns 0 on success and negative on failure.
  */
-int smack_accesses_add(struct smack_accesses *handle, const char *subject,
+__attribute__ ((visibility ("default"))) int smack_accesses_add(struct smack_accesses *handle, const char *subject,
 		       const char *object, const char *access_type);
 
 /*!
@@ -130,7 +130,7 @@ int smack_accesses_add(struct smack_accesses *handle, const char *subject,
  * @param deny_access_type access type to be turned off
  * @return Returns 0 on success and negative on failure.
  */
-int smack_accesses_add_modify(struct smack_accesses *handle,
+__attribute__ ((visibility ("default"))) int smack_accesses_add_modify(struct smack_accesses *handle,
 			      const char *subject,
 			      const char *object,
 			      const char *allow_access_type,
@@ -143,7 +143,7 @@ int smack_accesses_add_modify(struct smack_accesses *handle,
  * @param fd file descriptor
  * @return Returns 0 on success and negative on failure.
  */
-int smack_accesses_add_from_file(struct smack_accesses *handle, int fd);
+__attribute__ ((visibility ("default"))) int smack_accesses_add_from_file(struct smack_accesses *handle, int fd);
 
 /*!
  * Check whether SMACK allows access for given subject, object and requested
@@ -155,7 +155,7 @@ int smack_accesses_add_from_file(struct smack_accesses *handle, int fd);
  * @return Returns 1 if access is allowed, 0 if access is not allowed and
  * negative on error.
  */
-int smack_have_access(const char *subject, const char *object,
+__attribute__ ((visibility ("default"))) int smack_have_access(const char *subject, const char *object,
 		      const char *access_type);
 
 /*!
@@ -166,14 +166,14 @@ int smack_have_access(const char *subject, const char *object,
  * @return Returns 0 on success and negative on failure. If the operation
  * is succesful 'cipso' variable will contain a valid pointer.
  */
-int smack_cipso_new(struct smack_cipso **handle);
+__attribute__ ((visibility ("default"))) int smack_cipso_new(struct smack_cipso **handle);
 
 /*!
  * Destroys a struct smack_cipso instance.
  *
  * @param handle handle to a struct smack_cipso instance
  */
-void smack_cipso_free(struct smack_cipso *handle);
+__attribute__ ((visibility ("default"))) void smack_cipso_free(struct smack_cipso *handle);
 
 /*!
  * Apply CIPSO rules to the kernel.
@@ -181,7 +181,7 @@ void smack_cipso_free(struct smack_cipso *handle);
  * @param handle handle to a struct smack_cipso instance
  * @return Returns 0 on success and negative on failure.
  */
-int smack_cipso_apply(struct smack_cipso *handle);
+__attribute__ ((visibility ("default"))) int smack_cipso_apply(struct smack_cipso *handle);
 
 /*!
  * Add CIPSO rules from the given file.
@@ -190,7 +190,7 @@ int smack_cipso_apply(struct smack_cipso *handle);
  * @param fd file descriptor
  * @return Returns 0 on success and negative on failure.
  */
-int smack_cipso_add_from_file(struct smack_cipso *handle, int fd);
+__attribute__ ((visibility ("default"))) int smack_cipso_add_from_file(struct smack_cipso *handle, int fd);
 
 /*!
  * Get pointer to a string containing path to the mounted SmackFS.
@@ -198,7 +198,7 @@ int smack_cipso_add_from_file(struct smack_cipso *handle, int fd);
  * @return Returns a string contain path to the mount SmackFS if SMACK is
  * enabled and SmackFS is mounted. Otherwise, NULL is returned.
  */
-const char *smack_smackfs_path(void);
+__attribute__ ((visibility ("default"))) const char *smack_smackfs_path(void);
 
 /*!
   * Get the label that is associated with the callers process.
@@ -208,7 +208,7 @@ const char *smack_smackfs_path(void);
   * @return Returns length of the label on success and negative value
   * on failure.
   */
-ssize_t smack_new_label_from_self(char **label);
+__attribute__ ((visibility ("default"))) ssize_t smack_new_label_from_self(char **label);
 
 /*!
   * Get the label that is associated with a peer on the other end of a
@@ -220,7 +220,7 @@ ssize_t smack_new_label_from_self(char **label);
   * @return Returns length of the label on success and negative value
   * on failure.
   */
-ssize_t smack_new_label_from_socket(int fd, char **label);
+__attribute__ ((visibility ("default"))) ssize_t smack_new_label_from_socket(int fd, char **label);
 
 /*!
   * Get the SMACK label that is contained in an extended attribute.
@@ -233,7 +233,7 @@ ssize_t smack_new_label_from_socket(int fd, char **label);
   * @return Returns length of the label on success and negative value
   * on failure.
   */
-ssize_t smack_new_label_from_path(const char *path,
+__attribute__ ((visibility ("default"))) ssize_t smack_new_label_from_path(const char *path,
 				  const char *xattr,
 				  int follow,
 				  char **label);
@@ -248,7 +248,7 @@ ssize_t smack_new_label_from_path(const char *path,
   * @return Returns length of the label on success and negative value
   * on failure.
   */
-ssize_t smack_new_label_from_file(int fd,
+__attribute__ ((visibility ("default"))) ssize_t smack_new_label_from_file(int fd,
 				  const char *xattr,
 				  char **label);
 
@@ -262,7 +262,7 @@ ssize_t smack_new_label_from_file(int fd,
   * @return Returns length of the label on success and negative value
   * on failure.
   */
-int smack_set_label_for_path(const char *path,
+__attribute__ ((visibility ("default"))) int smack_set_label_for_path(const char *path,
 				  const char *xattr,
 				  int follow,
 				  const char *label);
@@ -276,7 +276,7 @@ int smack_set_label_for_path(const char *path,
   * @return Returns length of the label on success and negative value
   * on failure.
   */
-int smack_set_label_for_file(int fd,
+__attribute__ ((visibility ("default"))) int smack_set_label_for_file(int fd,
 				  const char *xattr,
 				  const char *label);
 
@@ -288,7 +288,7 @@ int smack_set_label_for_file(int fd,
   * @param follow whether or not to follow symbolic link
   * @return Returns 0 on success and negative on failure.
   */
-int smack_remove_label_for_path(const char *path,
+__attribute__ ((visibility ("default"))) int smack_remove_label_for_path(const char *path,
 				  const char *xattr,
 				  int follow);
 
@@ -299,7 +299,7 @@ int smack_remove_label_for_path(const char *path,
   * @param xattr the extended attribute containing the SMACK label
   * @return Returns 0 on success and negative on failure.
   */
-int smack_remove_label_for_file(int fd, const char *xattr);
+__attribute__ ((visibility ("default"))) int smack_remove_label_for_file(int fd, const char *xattr);
 
 /*!
  * Set the label associated with the callers process. The caller must have
@@ -308,7 +308,7 @@ int smack_remove_label_for_file(int fd, const char *xattr);
  * @param label a string containing the new label
  * @return Returns 0 on success and negative on failure.
  */
-int smack_set_label_for_self(const char *label);
+__attribute__ ((visibility ("default"))) int smack_set_label_for_self(const char *label);
 
 /*!
  * Revoke all rules for the given subject label.
@@ -316,7 +316,7 @@ int smack_set_label_for_self(const char *label);
  * @param subject subject to revoke
  * @return Returns 0 on success and negative on failure.
  */
-int smack_revoke_subject(const char *subject);
+__attribute__ ((visibility ("default"))) int smack_revoke_subject(const char *subject);
 
 /*!
  * Get SMACK label from file.
@@ -328,7 +328,7 @@ int smack_revoke_subject(const char *subject);
  * @param type label type to get
  * @return 0 on success and negative value on failure.
  */
-int smack_getlabel(const char *path, char** label,
+__attribute__ ((visibility ("default"))) int smack_getlabel(const char *path, char** label,
 		enum smack_label_type type);
 
 /*!
@@ -342,7 +342,7 @@ int smack_getlabel(const char *path, char** label,
  * @param type label type to get
  * @return 0 on success and negative value on failure.
  */
-int smack_lgetlabel(const char *path, char** label,
+__attribute__ ((visibility ("default"))) int smack_lgetlabel(const char *path, char** label,
 		enum smack_label_type type);
 
 /*!
@@ -355,7 +355,7 @@ int smack_lgetlabel(const char *path, char** label,
  * @param type label type to get
  * @return 0 on success and negative value on failure.
  */
-int smack_fgetlabel(int fd, char** label,
+__attribute__ ((visibility ("default"))) int smack_fgetlabel(int fd, char** label,
 		enum smack_label_type type);
 
 /*!
@@ -369,7 +369,7 @@ int smack_fgetlabel(int fd, char** label,
  * @param type label type to get
  * @return 0 on success and negative value on failure.
  */
-int smack_setlabel(const char *path, const char* label,
+__attribute__ ((visibility ("default"))) int smack_setlabel(const char *path, const char* label,
 		enum smack_label_type type);
 
 /*!
@@ -383,7 +383,7 @@ int smack_setlabel(const char *path, const char* label,
  * @param type label type to get
  * @return 0 on success and negative value on failure.
  */
-int smack_lsetlabel(const char *path, const char* label,
+__attribute__ ((visibility ("default"))) int smack_lsetlabel(const char *path, const char* label,
 		enum smack_label_type type);
 
 /*!
@@ -396,7 +396,7 @@ int smack_lsetlabel(const char *path, const char* label,
  * @param type label type to get
  * @return 0 on success and negative value on failure.
  */
-int smack_fsetlabel(int fd, const char* label,
+__attribute__ ((visibility ("default"))) int smack_fsetlabel(int fd, const char* label,
 		enum smack_label_type type);
 
 /*!
@@ -405,7 +405,7 @@ int smack_fsetlabel(int fd, const char* label,
  * @param label label to verify
  * @return Returns length of the label on success and negative on failure.
  */
-ssize_t smack_label_length(const char *label);
+__attribute__ ((visibility ("default"))) ssize_t smack_label_length(const char *label);
 
 /*!
  * Perform the initial policy load.
@@ -415,7 +415,7 @@ ssize_t smack_label_length(const char *label);
  *
  * @return Returns 0 on success and negative on failure.
  */
-int smack_load_policy(void);
+__attribute__ ((visibility ("default"))) int smack_load_policy(void);
 
 #ifdef __cplusplus
 }

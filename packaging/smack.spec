@@ -35,6 +35,9 @@ Library allows applications to work with Smack.
 cp %{SOURCE1001} .
 
 %build
+export CFLAGS+=" -fvisibility=hidden"
+  export CXXFLAGS+=" -fvisibility=hidden"
+  
 %reconfigure --with-systemdsystemunitdir=%{_unitdir}
 
 make %{?_smp_mflags}
