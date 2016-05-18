@@ -23,9 +23,11 @@
 
 #define ACCESSES_D_PATH "/etc/smack/accesses.d"
 #define CIPSO_D_PATH "/etc/smack/cipso.d"
+#define ONLYCAP_PATH "/etc/smack/onlycap"
 
 int clear(void);
 int apply_rules(const char *path, int clear);
 int apply_cipso(const char *path);
+int apply_onlycap(const char *path);
 
 #endif // COMMON_H
