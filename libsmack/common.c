@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/smack.h>
 
@@ -203,4 +204,66 @@ int apply_cipso(const char *path)
 	}
 
 	return 0;
+}
+
+int apply_onlycap(const char *path)
+{
+	FILE *file = fopen(path, "r");
+	int ret = 0;
+	if (file == NULL) {
+		if (ENOENT == errno) /* there is no configuration file,
+				        we should do nothing */
+			return 0;
+		fprintf(stderr, "open() failed for '%s' : %s\n", path,
+			strerror(errno));
+		return -1;
+	}
+
+	char buf[SMACK_LABEL_LEN + 2];
+	int cnt = 0;
+	int size = 10;
+	char **labels = malloc(sizeof(char*) * size);
+	if (labels == NULL) {
+		fputs("Out of memory.\n", stderr);
+		ret = -1;
+		goto out;
+	}
+
+	while (fgets(buf, SMACK_LABEL_LEN + 2, file) != NULL) {
+		if (strcmp(buf, "\n") == 0)
+			continue;
+		if (cnt == size) {
+			char **new_labels = realloc(labels, sizeof(char*) * size * 2);
+			if (new_labels == NULL) {
+				fputs("Out of memory.\n", stderr);
+				ret = -1;
+				goto out;
+			}
+			labels = new_labels;
+			size = size * 2;
+		}
+		int label_len = strlen(buf);
+		char* label = malloc(sizeof(char) * (label_len + 1));
+		if (label == NULL) {
+			fputs("Out of memory.\n", stderr);
+			ret = -1;
+			goto out;
+		}
+		memcpy(label, buf, label_len + 1);
+		if (label_len > 0) {
+			if (label[label_len - 1] == '\n')
+				label[label_len - 1] = 0;
+			labels[cnt++] = label;
+		} else
+			free(label);
+	}
+	ret = smack_set_onlycap((const char **)labels, cnt);
+out:
+	fclose(file);
+	int i;
+	for (i = 0; i < cnt; ++i) {
+		free(labels[i]);
+	}
+	free(labels);
+	return ret;
 }

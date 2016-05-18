@@ -1193,6 +1193,9 @@ int smack_load_policy(void)
 	if (apply_cipso(CIPSO_D_PATH))
 		return -1;
 
+	if (apply_onlycap(ONLYCAP_PATH))
+		return -1;
+
 	return 0;
 }
 
@@ -1233,6 +1236,55 @@ int smack_set_relabel_self(const char **labels, int cnt)
 		ret = -1;
 	else
 		ret = 0;
+
+out:
+	free(buf);
+	close(fd);
+	return ret;
+}
+
+int smack_set_onlycap(const char **labels, int cnt)
+{
+	int i;
+	int ret;
+	int fd = -1;
+	char *buf = NULL;
+	int size = 0;
+	int len;
+
+	if (init_smackfs_mnt())
+		return -1;
+
+	fd = openat(smackfs_mnt_dirfd, "onlycap", O_WRONLY);
+	if (fd < 0)
+		return -1;
+
+	if (labels && cnt) {
+		buf = malloc((SMACK_LABEL_LEN + 1) * cnt);
+		if (buf == NULL) {
+			close(fd);
+			return -1;
+		}
+
+		for (i = 0; i < cnt; ++i) {
+			len = get_label(buf + size, labels[i], NULL);
+			if (len <= 0) {
+				ret = -1;
+				goto out;
+			}
+			size += len;
+			buf[size++] = ' ';
+		}
+		if (write(fd, buf, size) < 0)
+			ret = -1;
+		else
+			ret = 0;
+	} else { /* emtpy list: reset onlycap */
+		if (write(fd, " ", 1) < 0)
+			ret = -1;
+		else
+			ret = 0;
+	}
 
 out:
 	free(buf);

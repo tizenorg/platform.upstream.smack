@@ -322,6 +322,7 @@ ssize_t smack_label_length(const char *label);
  * This function loads the Smack policy from default location and loads
  * it to kernel. Smackfs file system must be alreadt mounted.
  * It is designed for init process to load the policy at system startup.
+ * It also sets up CIPSO and onlycap list of labels.
  *
  * @return Returns 0 on success and negative on failure.
  */
@@ -339,6 +340,20 @@ int smack_load_policy(void);
  * @return Returns 0 on success and negative on failure.
  */
 int smack_set_relabel_self(const char **labels, int cnt);
+
+/*!
+ * Set the list of labels that will be allowed to have effective CAP_MAC_ADMIN
+ * and CAP_MAC_OVERRIDE. This set of labels will be applied (written)
+ * to the kernel interface "onlycap", located wherever the smackfs is mounted
+ * in the operating system. Setting empty list causes CAP_MAC_ADMIN &
+ * CAP_MAC_OVERRIDE to be unconstrained by any specific Smack label.
+ *
+ * @param labels list of labels (NULL for empty list)
+ * @param cnt number of labels (0 for empty list)
+ * @return Returns 0 on success and negative value on failure
+ *
+ */
+int smack_set_onlycap(const char **labels, int cnt);
 
 #ifdef __cplusplus
 }
