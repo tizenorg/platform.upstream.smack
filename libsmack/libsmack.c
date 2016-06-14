@@ -632,6 +632,11 @@ ssize_t smack_new_label_from_socket(int fd, char **label)
 	}
 
 	*label = result;
+
+	/* The 0 at the end of label should not be count to label length */
+	while(length > 0 && !result[length-1])
+		length--;
+
 	return length;
 }
 
