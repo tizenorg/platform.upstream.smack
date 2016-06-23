@@ -35,7 +35,7 @@ Library allows applications to work with Smack.
 cp %{SOURCE1001} .
 
 %build
-%reconfigure --with-systemdsystemunitdir=%{_unitdir}
+%reconfigure --with-systemdsystemunitdir=%{_unitdir} CFLAGS=-fPIE LDFLAGS=-pie
 
 make %{?_smp_mflags}
 
